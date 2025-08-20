@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" />
+  <title>XSS Sanitize Demo</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; max-width: 800px; }
+    textarea { width: 100%; height: 160px; }
+    pre { background: #111; color: #0f0; padding: 1rem; overflow: auto; }
+    .cols { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
+    .card { border: 1px solid #ddd; padding: 1rem; border-radius: 8px; }
+  </style>
+  <body>
+    <h1>XSS Sanitize Demo</h1>
+    <div class="cols">
+      <div class="card">
+        <h3>Input HTML</h3>
+        <textarea id="input"><p>Hello <img src="x" onerror="alert(1)"> world <a href="javascript:alert(1)" target="_blank">link</a></p></textarea>
+        <button id="run">Sanitize</button>
+      </div>
+      <div class="card">
+        <h3>Output HTML</h3>
+        <div id="output"></div>
+        <h3>Output Source</h3>
+        <pre id="source"></pre>
+      </div>
+    </div>
+
+    <script type="module">
+      import { sanitize } from "../src/sanitize.js";
+
+      const input = document.getElementById("input");
+      const out = document.getElementById("output");
+      const src = document.getElementById("source");
+      document.getElementById("run").addEventListener("click", () => {
+        const cleaned = sanitize(input.value);
+        out.innerHTML = cleaned;
+        src.textContent = cleaned.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      });
+    </script>
+  </body>
+</html>
