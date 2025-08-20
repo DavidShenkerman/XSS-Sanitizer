@@ -1,12 +1,12 @@
 {
-    "name": "@YOUR_HANDLE/xss-sanitize",
+    "name": "@DavidShenkerman/xss-sanitize",
     "version": "0.1.0",
     "description": "Tiny DOM-based HTML sanitizer (browser-first, Node-testable).",
     "type": "module",
     "main": "src/sanitize.js",
     "exports": "./src/sanitize.js",
     "keywords": ["xss", "sanitizer", "html", "security"],
-    "author": "YOUR NAME",
+    "author": "David Shenkerman",
     "license": "MIT",
     "scripts": {
       "test": "node test/test.js",
